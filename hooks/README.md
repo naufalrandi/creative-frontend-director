@@ -1,18 +1,18 @@
-# First-Layer Hook
+# First-Layer Routing
 
-Skills cannot control load order. This hook makes the director the first design authority by having the harness inject an instruction whenever a prompt shows frontend intent.
+Skills cannot control load order. These files make the director the first design authority on each host.
 
-## Install
+| Host | Mechanism | File | Install |
+|---|---|---|---|
+| Claude Code | `UserPromptSubmit` hook, harness-enforced | `frontend-intent-hook.sh`, `settings-snippet.json` | `./scripts/install.sh --with-hook`, or merge the snippet into `~/.claude/settings.json` |
+| Codex, OpenCode, Copilot CLI, Hermes | instructions file | `../AGENTS-SNIPPET.md` | append to `AGENTS.md` (global `~/.codex/AGENTS.md`, `~/.config/opencode/AGENTS.md`, `~/.hermes/AGENTS.md`, or the project root) |
+| Gemini CLI | instructions file | `../AGENTS-SNIPPET.md` | append to `~/.gemini/GEMINI.md` or the project `GEMINI.md` |
+| Cursor | always-applied rule | `cursor/creative-frontend-director.mdc` | copy to `.cursor/rules/` in the project |
+| Antigravity CLI | none verified | | invoke explicitly with `/creative-frontend-director`, or rely on description matching |
 
-Merge `hooks/settings-snippet.json` into `~/.claude/settings.json` (global) or `.claude/settings.json` (project). Adjust the path if the skill is installed somewhere other than `~/.agents/skills`.
+The Claude Code hook is the only mechanism the harness enforces. The others are instructions the model reads, so keep the skill description current too.
 
-Or run:
-
-```bash
-./scripts/install.sh --with-hook
-```
-
-## Test
+## Test The Claude Code Hook
 
 ```bash
 echo '{"prompt":"build the dashboard for this project"}' | bash hooks/frontend-intent-hook.sh

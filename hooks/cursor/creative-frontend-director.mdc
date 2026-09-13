@@ -1,0 +1,6 @@
+---
+description: Route frontend UI work through the creative-frontend-director skill first
+alwaysApply: true
+---
+
+For any task that creates, implements, redesigns, improves, polishes, reviews, or visually changes frontend UI, load the `creative-frontend-director` skill first and follow its stages before any other design or taste skill. This applies even when the request does not say "design": dashboards, pages, admin panels, landing pages, settings, onboarding, components, complete frontend applications. Other design skills execute the direction it writes in `DESIGN.md`; at most one taste specialist per surface. Completion requires rendered screenshots and a taste rubric score.

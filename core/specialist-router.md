@@ -21,7 +21,7 @@ The director owns direction. Specialist skills execute it. Consult this registry
 ## Rules
 
 1. At most one taste specialist per surface. The first six rows are taste specialists.
-2. Verify the skill name exists in the available skills list before invoking. A missing skill is skipped and noted in the ship report, never improvised.
+2. Verify the skill exists in the host's skill list before invoking: the Skill tool listing in Claude Code, the `$` picker in Codex, the `skill` tool in OpenCode, `/skills` in Antigravity and Copilot, `activate_skill` in Gemini, `skills_list` in Hermes. A missing skill is skipped and noted in the ship report, never improvised. Invocation per host is in `reference/harness-adapters.md`.
 3. Pass the specialist the `DESIGN.md` path and the brief path. It executes within them.
 4. If a specialist's output conflicts with `DESIGN.md`, `DESIGN.md` wins. Adjust the output, not the direction.
 5. If another general design skill loaded automatically alongside this director, treat it as row one to six: it may execute, it does not redirect.

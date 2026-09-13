@@ -12,7 +12,8 @@ Agents trained on web design defaults tend to generate generic UIs: stat card gr
 git clone https://github.com/naufalrandi/creative-frontend-director.git
 cd creative-frontend-director
 ./setup.sh                    # Install to ~/.agents/skills
-./setup.sh --with-hook        # Also merge first-layer hook
+./setup.sh --all              # Install into every agent host on this machine
+./setup.sh --with-hook        # Claude Code: also merge the first-layer hook
 ```
 
 Then use it in Claude Code:
@@ -81,14 +82,21 @@ Other design skills may load on the same prompts. The director treats them as ex
 
 ## Compatibility
 
-**Primary:** Claude Code (reads `SKILL.md` frontmatter, supports `.agents/skills` and hook system).
+Any host that loads `SKILL.md` can run the director. Stage files name actions, not host tools, and `reference/harness-adapters.md` maps each action to the host with a fallback. Verified hosts and their global install location:
 
-**Compatible harnesses:** Any AI agent harness that:
-- Loads skill markdown from `~/.agents/skills/{name}/SKILL.md`
-- Supports `AskUserQuestion` and `Skill` tool references
-- Respects `.claude/settings.json` hooks (UserPromptSubmit)
+| Host | Install | Invoke |
+|---|---|---|
+| Claude Code | `./scripts/install.sh --agent claude` or the default | Skill tool, auto by description, hook routing |
+| Codex CLI and IDE | default (`~/.agents/skills`) | `$creative-frontend-director` or auto |
+| OpenCode | `--agent opencode` or the default | `skill` tool or auto |
+| Antigravity CLI (`agy`) | `--agent agy` | `/creative-frontend-director` or auto |
+| Gemini CLI | `--agent gemini` or the default | `activate_skill` or auto |
+| Cursor | `--agent cursor` | auto, plus the rule in `hooks/cursor/` |
+| GitHub Copilot CLI | `--agent copilot` or the default | `/skills` or auto |
+| Hermes Agent | `--agent hermes` | `skill_view("creative-frontend-director")` |
+| Any project, any host | `--agent project` | writes `.agents/skills/` in the repo |
 
-For harnesses without hook or Skill tool support, `AskUserQuestion` and inline Skill routing degrade to prose fallbacks (see `core/clarify.md`).
+`--all` installs into every host detected on the machine. `--link` symlinks instead of copying so one checkout serves every host. Per-host agent definitions are in `agents/`, routing equivalents in `hooks/README.md`.
 
 ## Contributing
 

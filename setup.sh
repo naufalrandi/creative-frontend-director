@@ -4,7 +4,9 @@ set -euo pipefail
 # Creative Frontend Director — installation wrapper
 # Usage:
 #   ./setup.sh                     # Install to ~/.agents/skills
-#   ./setup.sh --with-hook         # Install + merge hook
+#   ./setup.sh --agent agy         # One host preset (see --list)
+#   ./setup.sh --all               # Every host detected on this machine
+#   ./setup.sh --with-hook         # Claude Code: also merge the routing hook
 #   ./setup.sh /path/to/install    # Install to custom directory
 
 echo "=== Creative Frontend Director Setup ==="
@@ -15,7 +17,9 @@ if [[ $# -eq 0 ]]; then
   echo ""
   echo "Modes:"
   echo "  ./setup.sh                   # Standard install"
-  echo "  ./setup.sh --with-hook       # Install + merge UserPromptSubmit hook"
+  echo "  ./setup.sh --agent agy       # One host preset (see --list)"
+  echo "  ./setup.sh --all             # Every host detected on this machine"
+  echo "  ./setup.sh --with-hook       # Claude Code: also merge the routing hook"
   echo "  ./setup.sh /path/to/dir      # Custom install directory"
   echo ""
 fi
