@@ -1,115 +1,158 @@
-# Creative Frontend Director
+<h1 align="center">Creative Frontend Director</h1>
 
-A project-aware, anti-slop creative frontend skill that makes a coding agent behave like a principal product designer and creative director. It discovers the product, asks at most once, locks a written direction in `DESIGN.md`, routes at most one specialist, renders, and gates completion on a scored taste rubric.
+<p align="center">
+A skill that makes your coding agent design the product that exists, not the template it remembers.
+</p>
 
-## Why This Skill
+<p align="center">
+<a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-black"></a>
+<img alt="version" src="https://img.shields.io/badge/version-4.1.0-black">
+<img alt="hosts" src="https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20Codex%20%7C%20OpenCode%20%7C%20Antigravity%20%7C%20Gemini%20%7C%20Cursor%20%7C%20Copilot%20%7C%20Hermes-black">
+</p>
 
-Agents trained on web design defaults tend to generate generic UIs: stat card grids, sidebar layouts, pill badges, decorative elements. This skill redirects the agent to reason about the **specific product, its users, and its workflows first**, then design the frontend that could only belong to that product. It writes down the direction, scores the result against a taste rubric, and gates completion on quality.
+## Same prompt. Same repo. One difference.
+
+Two fresh agents were given an identical fixture: a README describing a bus-depot maintenance tool for mechanics, and the prompt **"Build the main dashboard."** One had this skill. One did not.
+
+| Without the skill | With the skill |
+|---|---|
+| ![without](docs/evals/s1-without-skill.png) | ![with](docs/evals/s1-with-skill.png) |
+| Four stat counters, every region in a rounded card, pill badges, a chart added "by system", main-plus-rail layout. Competent. Could be any ops dashboard. | The fleet ranked against the 05:30 pull-out, a line drawn through the list separating what goes out from what does not, bays as a physical board, no chart, no cards around content. Only makes sense for this product. |
+| No written brief. No direction. No review. | `.design/brief.md`, three scored directions, a ten-section `DESIGN.md`, a two-round rubric review, seven screenshots. |
+
+Read the artifacts the skilled run produced: [directions](docs/evals/s1-directions.md), [DESIGN.md](docs/evals/s1-DESIGN.md), [review](docs/evals/s1-review.md). The full eval log is in [evals/baseline.md](evals/baseline.md).
+
+## Why
+
+Coding agents ship generic UI because they assemble from defaults: sidebar plus card grid, four KPI tiles, purple accent, glass, bento. Prompting "make it less generic" polishes the same structure. This skill changes the order of work. The agent reads the product first, writes a direction down, implements it, renders it, and scores the render against a rubric before it is allowed to say "done".
 
 ## Quick Start
 
 ```bash
 git clone https://github.com/naufalrandi/creative-frontend-director.git
 cd creative-frontend-director
-./setup.sh                    # Install to ~/.agents/skills
-./setup.sh --all              # Install into every agent host on this machine
-./setup.sh --with-hook        # Claude Code: also merge the first-layer hook
+./setup.sh                 # installs to ~/.agents/skills, read by most hosts
+./setup.sh --all           # installs for every agent host found on this machine
 ```
 
-Then use it in Claude Code:
+Then, in any supported agent:
+
+```
+build the dashboard
+redesign the settings page
+make this page less AI-generated
+extract a design system from our current app
+```
+
+No need to say "design". The description triggers on ordinary frontend requests.
+
+## How It Works
+
+```mermaid
+flowchart LR
+    A[1 Discover<br/>repo evidence] --> B{2 Clarify<br/>only if material}
+    B --> C[3 Resolve brand]
+    C --> D[4 Direction<br/>3 options, pick 1<br/>write DESIGN.md]
+    D --> E[5 Route<br/>one specialist max]
+    E --> F[6 Assets]
+    F --> G[7 Implement]
+    G --> H[8 Render<br/>390 / 768 / 1440]
+    H --> I{9 Taste gate<br/>score 1-5 x 5}
+    I -- any dim < 3 --> D
+    I -- pass --> J[10 Quality gates<br/>a11y, perf, SEO]
+    J --> K[11 Ship report]
+```
+
+Five rules hold the whole thing together:
+
+1. **Written, not thought.** The brief, the three directions, `DESIGN.md`, and the review are files. A step that only happened in reasoning did not happen.
+2. **Ask once, only if it matters.** At most four questions, recommended answer first, and only when the answer would change direction, structure, or scope. Every guess is reported at the end with the rule that chose it.
+3. **One specialist per surface.** Other taste skills execute the direction in `DESIGN.md`. They do not redefine it.
+4. **No render, no done.** Screenshots at three widths are the input to the gate, not a nice-to-have.
+5. **Rethink before polish.** A rubric score under 3 on product fit, hierarchy, typography, rhythm, or identity sends the agent back to structure. Shadows and radii are not allowed to fix a weak concept.
+
+## What You Get In Your Repo
+
+```
+DESIGN.md                 the locked direction: theme, tokens, type, spacing, components, motion, voice, anti-patterns, signature
+.design/
+  brief.md                what the product is, tagged observed / provided / inferred
+  directions.md           three structurally different directions, scored, one picked
+  brand-spec.md           tokens extracted from your real brand source, when you have one
+  review.md               the rubric score, rounds, and remaining weaknesses
+  screens/                phone, tablet, desktop renders
+```
+
+The next session, and every other agent, reads the same `DESIGN.md`. Direction survives context resets.
+
+## Anti-Slop, As Recipes
+
+Prohibitions get negotiated away. So each default reflex is paired with what to build instead. Three of the fifteen:
+
+| Default reflex | Build this instead |
+|---|---|
+| a row of four KPI cards | one primary number with its trend and context, the rest inline or in a compact table with tabular numerals |
+| sidebar plus card grid | start from the questions the user asks on arrival; answer each in its tightest form; pick navigation from module count and switching frequency |
+| chart to look sophisticated | a chart only when a decision depends on shape over time or comparison, otherwise a number with a delta |
+
+Full table in [core/anti-slop.md](core/anti-slop.md), plus the two tests every screen must pass: the removal test and the brand-removal test.
+
+## Works With Your Other Skills
+
+The director sits above specialist taste skills, not beside them. A registry in [core/specialist-router.md](core/specialist-router.md) maps the chosen direction to at most one specialist, verifies it exists on the host, and hands it `DESIGN.md`. Engineering, accessibility, browser QA, and data-viz skills are called as needed in the later stages.
+
+On Claude Code, a small `UserPromptSubmit` hook makes the director the first design authority before any sibling skill loads:
+
 ```bash
-claude    # Loads AGENTS.md snippet or hook automatically
+./setup.sh --with-hook
 ```
 
-Trigger it with natural prompts: *"build the dashboard"*, *"redesign this page"*, *"make the UI less generic"*.
+Other hosts use an instructions-file snippet or a rule file. See [hooks/README.md](hooks/README.md).
 
-## Priority
+## Supported Hosts
 
-1. understand the project deeply
-2. beautiful, original, product-specific frontend
-3. no generic AI-generated design
-4. coherent visual identity, written down
-5. excellent UX
+Stage files name actions, not host tools. [reference/harness-adapters.md](reference/harness-adapters.md) maps each action per host with a fallback, so the same skill runs everywhere `SKILL.md` is read.
 
-Secondary: responsive design, accessibility. Bonus: performance, Core Web Vitals, Lighthouse, SEO, GEO.
+| Host | Install | Invoke |
+|---|---|---|
+| Claude Code | default | Skill tool, auto, hook routing |
+| Codex CLI and IDE | default | `$creative-frontend-director` or auto |
+| OpenCode | default or `--agent opencode` | `skill` tool or auto |
+| Antigravity CLI `agy` | `--agent agy` | `/creative-frontend-director` or auto |
+| Gemini CLI | default or `--agent gemini` | `activate_skill` or auto |
+| Cursor | `--agent cursor` | auto, plus the rule in `hooks/cursor/` |
+| GitHub Copilot CLI | default or `--agent copilot` | `/skills` or auto |
+| Hermes Agent | `--agent hermes` | `skill_view("creative-frontend-director")` |
+| Any project | `--agent project` | writes `.agents/skills/` into the repo |
+
+`--link` symlinks one checkout into every host. `--list` shows what is detected. Per-host agent definitions for isolated runs are in [agents/](agents/).
 
 ## Layout
 
 ```
-SKILL.md                  entry point, authority stack, router, stages, hard rules
-core/                     one file per stage 1 to 6
-reference/                design reference for implementation
-gates/                    taste rubric and secondary quality gates
-workflows/                stage matrix per workflow, render procedure
-templates/                DESIGN.md, design read, brand spec, design contract
-hooks/                    first-layer UserPromptSubmit hook
-agents/                   optional isolated subagent definition
-evals/                    runnable scenarios and baseline log
+SKILL.md          entry point: authority stack, router, eleven stages, hard rules
+core/             stages 1 to 6, the anti-slop recipe, the specialist router, the asset ladder
+reference/        design reference and the harness adapters
+gates/            the taste rubric and the secondary quality gates
+workflows/        which stages each workflow runs, and how to render
+templates/        DESIGN.md, design read, brand spec, design contract
+hooks/            first-layer routing per host
+agents/           isolated director in each host's agent format
+evals/            runnable scenarios and the baseline log
+docs/evals/       the screenshots and artifacts shown above
 ```
 
-Written outputs in the target project: `DESIGN.md` at the root and a `.design/` folder with the brief, directions, brand spec, review, and screenshots.
+## Honest Limits
 
-## Install
-
-```bash
-./scripts/install.sh                 # ~/.agents/skills
-./scripts/install.sh --with-hook     # also merges the first-layer hook into ~/.claude/settings.json
-./scripts/install.sh /path/to/dir    # custom skills directory
-```
-
-Project-local: `./scripts/install.sh .agents/skills`.
-
-## First-Layer Routing
-
-Skills cannot control load order. Two mechanisms make the director run first:
-
-1. The hook in `hooks/` injects a routing instruction whenever a prompt shows frontend intent. Strongest option.
-2. `AGENTS-SNIPPET.md` merged into your `AGENTS.md` or `CLAUDE.md`. Weaker, costs nothing.
-
-For full isolation, register `agents/frontend-director.md` as a subagent and delegate design tasks to it.
-
-## Working With Sibling Skills
-
-Other design skills may load on the same prompts. The director treats them as executors of the direction it writes. `core/specialist-router.md` holds the registry and the one-taste-specialist rule. Recommended companions: `frontend-patterns` and a framework skill for implementation, `frontend-a11y`, `browser-qa`, and `click-path-audit` for quality, `dataviz` for charts.
-
-## Typical Prompts
-
-`build the dashboard`, `implement user management`, `redesign this page`, `redesign the whole frontend`, `make this UI look better`, `make this less AI-generated`, `build a date picker component`, `extract a design system from the current app`.
-
-## Evals
-
-`evals/scenarios.md` lists runnable scenarios. Run each baseline without the skill, record rationalizations in `evals/baseline.md`, then run with the skill and compare.
-
-## Compatibility
-
-Any host that loads `SKILL.md` can run the director. Stage files name actions, not host tools, and `reference/harness-adapters.md` maps each action to the host with a fallback. Verified hosts and their global install location:
-
-| Host | Install | Invoke |
-|---|---|---|
-| Claude Code | `./scripts/install.sh --agent claude` or the default | Skill tool, auto by description, hook routing |
-| Codex CLI and IDE | default (`~/.agents/skills`) | `$creative-frontend-director` or auto |
-| OpenCode | `--agent opencode` or the default | `skill` tool or auto |
-| Antigravity CLI (`agy`) | `--agent agy` | `/creative-frontend-director` or auto |
-| Gemini CLI | `--agent gemini` or the default | `activate_skill` or auto |
-| Cursor | `--agent cursor` | auto, plus the rule in `hooks/cursor/` |
-| GitHub Copilot CLI | `--agent copilot` or the default | `/skills` or auto |
-| Hermes Agent | `--agent hermes` | `skill_view("creative-frontend-director")` |
-| Any project, any host | `--agent project` | writes `.agents/skills/` in the repo |
-
-`--all` installs into every host detected on the machine. `--link` symlinks instead of copying so one checkout serves every host. Per-host agent definitions are in `agents/`, routing equivalents in `hooks/README.md`.
+- The rubric score is a self-assessment. An independent judge run is on the roadmap.
+- Eval S1 has been run. S2 to S11 are written and waiting.
+- Antigravity has no verified prompt hook, so routing there is by description or explicit `/creative-frontend-director`.
+- Raster image generation needs a configured provider skill. Without one the agent authors SVG or leaves an honest placeholder.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for:
-- How to propose stage changes
-- Eval run requirement
-- Frontmatter size limits
-- Conventional commit format
+Skill edits are tested like code: run a scenario from [evals/scenarios.md](evals/scenarios.md) without and with your change, record both in `evals/baseline.md`, open a PR. Details in [CONTRIBUTING.md](CONTRIBUTING.md). Agent-assisted contributors should read [CLAUDE.md](CLAUDE.md).
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for full text.
-
----
-
-**More details:** See [CLAUDE.md](CLAUDE.md) for contributor setup and architecture.
+[MIT](LICENSE)
