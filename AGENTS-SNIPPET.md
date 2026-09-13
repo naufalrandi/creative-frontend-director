@@ -1,4 +1,6 @@
-# Recommended AGENTS.md Snippet
+# Recommended Instructions Snippet
+
+Append to `AGENTS.md` (Codex, OpenCode, Copilot CLI, Hermes), `CLAUDE.md` (Claude Code), or `GEMINI.md` (Gemini CLI), globally or per project.
 
 ## Frontend Creative Direction
 

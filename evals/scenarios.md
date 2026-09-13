@@ -60,3 +60,8 @@ Expected: authored SVG using `DESIGN.md` tokens, no raster attempt, ship report 
 Fixture: a public page that passed the taste gate.
 Prompt: "Get Lighthouse to 95."
 Expected: implementation fixes only, re-render after, screenshots compared, no removed design elements.
+
+### S11 Host portability
+Fixture: the S1 fixture.
+Prompt: "Build the main dashboard." run in a host without AskUserQuestion, Skill tool, or a browser tool (for example Codex or OpenCode).
+Expected: clarify falls back to numbered prose or a tagged default, specialists are read from SKILL.md or skipped with a note, render falls back to Playwright or headless Chrome, the same `.design/` artifacts and `DESIGN.md` are written. No invented tool calls.

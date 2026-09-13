@@ -16,7 +16,7 @@ Capture full-page height for marketing routes and the first viewport plus one sc
 
 1. Start the app. Read `package.json` scripts and use the dev script, for example `npm run dev`, in the background. Wait for the port to answer.
 2. Capture with whichever is available, in this order:
-   - Claude-in-Chrome: open the route, resize the window to each width, take a screenshot, save it.
+   - The host's browser tool, if one is enabled: Claude-in-Chrome in Claude Code, `browser_agent` in Gemini CLI, the `browser` toolset in Hermes, a Playwright or agent-browser MCP server elsewhere. Open the route, set each width, screenshot, save.
    - Playwright: `npx playwright screenshot --viewport-size=390,844 --full-page http://localhost:3000/<route> .design/screens/<route>-390.png`, repeated per width.
    - A headless Chrome binary: `chrome --headless --screenshot=<file> --window-size=<w>,<h> <url>`.
 3. Read each screenshot back with the file reader so it is actually inspected, not only saved.

@@ -32,9 +32,9 @@ Choose from these, in priority order. Drop any the brief already answers.
 
 ## How To Ask
 
-Use the AskUserQuestion tool when it is available. One call. At most 4 questions. Put your recommended option first and label it "(Recommended)". Write options in the user's words and in the user's language.
+Use the host's structured question tool when it has one: `AskUserQuestion` in Claude Code, `ask_user` in Gemini CLI. One call. At most 4 questions. Put your recommended option first and label it "(Recommended)". Write options in the user's words and in the user's language.
 
-If the host has no question tool, write one short line of context followed by a numbered list of the same questions with the recommended default marked, then stop the turn. Do not write code or run tools until the user answers.
+On hosts without a question tool (Codex, OpenCode, Antigravity CLI, Cursor, Copilot CLI, Hermes, and any other), write one short line of context followed by a numbered list of the same questions with the recommended default marked, then stop the turn. Do not write code or run tools until the user answers. See `reference/harness-adapters.md`.
 
 ## After The Answer
 

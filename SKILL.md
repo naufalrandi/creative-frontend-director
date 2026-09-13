@@ -1,5 +1,7 @@
 ---
 name: creative-frontend-director
+license: MIT
+compatibility: Any agent that loads SKILL.md with a shell and file tools. Rendering needs a browser tool, Playwright, or headless Chrome.
 description: Use when a task creates, implements, redesigns, restyles, polishes, reviews, or visually changes any frontend surface - pages, screens, dashboards, landing pages, admin panels, settings, onboarding, components, design systems, or whole frontend projects. Triggers even without the word design, e.g. build the dashboard, implement the user management page, make this UI better, fix this ugly page, make it less AI-generated. Not for backend, database, infra, CLI, or non-visual refactors.
 ---
 
@@ -56,6 +58,10 @@ The stage matrix for each workflow is in `workflows/workflows.md`.
 | 11 | Ship | this file | final report |
 
 Load a stage file only when that stage runs.
+
+## Host Adaptation
+
+Stage files name actions, not host tools. This skill runs in Claude Code, Codex, OpenCode, Antigravity CLI, Gemini CLI, Cursor, Copilot CLI, Hermes, and any host that reads `SKILL.md`. When a stage names a question tool, a skill tool, a browser, or a subagent, map it with `reference/harness-adapters.md` and use the listed fallback if the host lacks it. Never invent a tool call.
 
 ## Hard Rules
 
