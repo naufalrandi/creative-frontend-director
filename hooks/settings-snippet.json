@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME/.agents/skills/creative-frontend-director/hooks/frontend-intent-hook.sh\""
+          }
+        ]
+      }
+    ]
+  }
+}
