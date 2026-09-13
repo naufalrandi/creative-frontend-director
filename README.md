@@ -2,6 +2,26 @@
 
 A project-aware, anti-slop creative frontend skill that makes a coding agent behave like a principal product designer and creative director. It discovers the product, asks at most once, locks a written direction in `DESIGN.md`, routes at most one specialist, renders, and gates completion on a scored taste rubric.
 
+## Why This Skill
+
+Agents trained on web design defaults tend to generate generic UIs: stat card grids, sidebar layouts, pill badges, decorative elements. This skill redirects the agent to reason about the **specific product, its users, and its workflows first**, then design the frontend that could only belong to that product. It writes down the direction, scores the result against a taste rubric, and gates completion on quality.
+
+## Quick Start
+
+```bash
+git clone https://github.com/naufalrandi/creative-frontend-director.git
+cd creative-frontend-director
+./setup.sh                    # Install to ~/.agents/skills
+./setup.sh --with-hook        # Also merge first-layer hook
+```
+
+Then use it in Claude Code:
+```bash
+claude    # Loads AGENTS.md snippet or hook automatically
+```
+
+Trigger it with natural prompts: *"build the dashboard"*, *"redesign this page"*, *"make the UI less generic"*.
+
 ## Priority
 
 1. understand the project deeply
@@ -58,3 +78,30 @@ Other design skills may load on the same prompts. The director treats them as ex
 ## Evals
 
 `evals/scenarios.md` lists runnable scenarios. Run each baseline without the skill, record rationalizations in `evals/baseline.md`, then run with the skill and compare.
+
+## Compatibility
+
+**Primary:** Claude Code (reads `SKILL.md` frontmatter, supports `.agents/skills` and hook system).
+
+**Compatible harnesses:** Any AI agent harness that:
+- Loads skill markdown from `~/.agents/skills/{name}/SKILL.md`
+- Supports `AskUserQuestion` and `Skill` tool references
+- Respects `.claude/settings.json` hooks (UserPromptSubmit)
+
+For harnesses without hook or Skill tool support, `AskUserQuestion` and inline Skill routing degrade to prose fallbacks (see `core/clarify.md`).
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for:
+- How to propose stage changes
+- Eval run requirement
+- Frontmatter size limits
+- Conventional commit format
+
+## License
+
+MIT License. See [LICENSE](LICENSE) for full text.
+
+---
+
+**More details:** See [CLAUDE.md](CLAUDE.md) for contributor setup and architecture.

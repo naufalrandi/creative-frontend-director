@@ -18,7 +18,7 @@ mkdir -p "$TARGET_ROOT"
 rm -rf "$TARGET_DIR"
 mkdir -p "$TARGET_DIR"
 # Copy everything except local editor state and git metadata.
-(cd "$SOURCE_DIR" && LC_ALL=C tar --exclude='./.git' --exclude='./.claude' --exclude='./.design' -cf - .) | (cd "$TARGET_DIR" && LC_ALL=C tar -xf -)
+(cd "$SOURCE_DIR" && LC_ALL=C tar --exclude='./.git' --exclude='./.claude' --exclude='./.design' --exclude='./.github' --exclude='./CLAUDE.md' --exclude='./CONTRIBUTING.md' --exclude='./setup.sh' -cf - .) | (cd "$TARGET_DIR" && LC_ALL=C tar -xf -)
 chmod +x "$TARGET_DIR/hooks/frontend-intent-hook.sh" "$TARGET_DIR/scripts/install.sh"
 
 echo "Installed creative-frontend-director to: $TARGET_DIR"

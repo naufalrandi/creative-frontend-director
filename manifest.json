@@ -27,6 +27,9 @@
   "agent": "agents/frontend-director.md",
   "files": [
     "AGENTS-SNIPPET.md",
+    "CLAUDE.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
     "README.md",
     "SKILL.md",
     "agents/frontend-director.md",
@@ -49,6 +52,8 @@
     "manifest.json",
     "reference/design-reference.md",
     "scripts/install.sh",
+    "scripts/update-manifest.sh",
+    "setup.sh",
     "templates/DESIGN.md",
     "templates/brand-spec.md",
     "templates/design-contract.md",
