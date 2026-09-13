@@ -4,7 +4,7 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 python3 - <<'PY'
 import json, os
-skip = ('./.git', './.claude', './.design', './.github')
+skip = ('./.git', './.claude', './.design', './.github', './docs')
 files = sorted(
     os.path.relpath(os.path.join(r, f), ".")
     for r, _, fs in os.walk(".")

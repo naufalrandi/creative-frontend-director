@@ -84,7 +84,7 @@ install_to() {
   fi
   mkdir -p "$target"
   (cd "$SOURCE_DIR" && LC_ALL=C tar --exclude='./.git' --exclude='./.claude' --exclude='./.design' \
-      --exclude='./.github' --exclude='./CLAUDE.md' --exclude='./CONTRIBUTING.md' --exclude='./setup.sh' \
+      --exclude='./.github' --exclude='./docs' --exclude='./CLAUDE.md' --exclude='./CONTRIBUTING.md' --exclude='./setup.sh' \
       -cf - .) | (cd "$target" && LC_ALL=C tar -xf -)
   chmod +x "$target/hooks/frontend-intent-hook.sh" "$target/scripts/"*.sh
   echo "Installed $target"
