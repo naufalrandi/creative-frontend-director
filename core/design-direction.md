@@ -21,6 +21,10 @@ Once a direction is chosen, write `DESIGN.md` at the project root from `template
 
 Product: infrastructure monitoring. Users: experienced operators. Character: calm, precise, technical. Density: high. Hierarchy: alignment, type weight, and status semantics carry it, not boxes. Surfaces: restrained, separators over cards. Motion: functional only. Signature: a continuous signal and event timeline that connects every change over time. Anti-patterns: marketing cards, neon cyber styling, glass panels, KPI card rows.
 
+## Commit To The Identity
+
+Half-committed identity reads as a template. `DESIGN.md` must state the six commitments in `reference/identity-kits.md`: wordmark treatment, type pairing, palette temperature, accent budget, shape language, motion attitude. Each with a concrete value. Inter plus slate is allowed only with a written reason.
+
 ## Rules
 
 - Token values are concrete: hex or oklch, px or rem, real font stacks. No placeholders left in `DESIGN.md`.

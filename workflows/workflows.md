@@ -16,6 +16,8 @@ Every workflow runs a subset of the eleven stages in `SKILL.md`. Run the marked 
 | 10 Secondary gates | yes | yes | a11y only | yes | yes | a11y, perf | no | no |
 | 11 Ship | yes | yes | yes | yes | yes | yes | findings | yes |
 
+Stage 7 ends with the P0 items of `gates/craft-checklist.md` and `scripts/check-tokens.sh` in every workflow that implements. Stage 9 uses the judge in `gates/judge-prompt.md` whenever the host can dispatch one.
+
 "reuse" means read the existing `DESIGN.md` and `.design/` files and do not regenerate them. "partial" means directions are explored for the page structure only, within the existing identity.
 
 ## Greenfield

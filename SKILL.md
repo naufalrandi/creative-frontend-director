@@ -48,12 +48,12 @@ The stage matrix for each workflow is in `workflows/workflows.md`.
 | 1 | Discover | `core/project-discovery.md` | `.design/brief.md` |
 | 2 | Clarify | `core/clarify.md` | answers into the brief |
 | 3 | Resolve brand | `core/brand-resolution.md` | `.design/brand-spec.md` |
-| 4 | Direction | `core/creative-reasoning.md`, `core/design-direction.md`, `core/product-signature.md` | `.design/directions.md`, `DESIGN.md` |
+| 4 | Direction | `core/creative-reasoning.md`, `core/design-direction.md`, `core/product-signature.md`, `reference/identity-kits.md` | `.design/directions.md`, `DESIGN.md` |
 | 5 | Route specialists | `core/specialist-router.md` | one specialist call at most |
 | 6 | Assets | `core/assets.md` | SVG, icons, or placeholders |
-| 7 | Implement | `reference/design-reference.md`, `core/anti-slop.md` | code |
+| 7 | Implement | `reference/design-reference.md`, `reference/implementation-recipes.md`, `reference/motion-recipes.md`, `core/anti-slop.md` | code, then `gates/craft-checklist.md` P0 |
 | 8 | Render | `workflows/render.md` | `.design/screens/*.png` |
-| 9 | Taste gate | `gates/taste-rubric.md` | score in `.design/review.md` |
+| 9 | Taste gate | `gates/taste-rubric.md`, `gates/judge-prompt.md` | score in `.design/review.md` |
 | 10 | Secondary gates | `gates/quality-gates.md` | fixes, re-render |
 | 11 | Ship | this file | final report |
 
@@ -73,9 +73,13 @@ Stage files name actions, not host tools. This skill runs in Claude Code, Codex,
 - Never fix weak structure with effects.
 - A component library is infrastructure, not creative direction. Reason from information relationships to the primitive, never from the primitive to the content.
 
+## Definition Of Done
+
+A surface is done when all of these are true, in this order: `DESIGN.md` states the six identity commitments; every P0 item in `gates/craft-checklist.md` passes; `scripts/check-tokens.sh` passes; screenshots exist at three widths; the rubric passes, judged independently when the host can dispatch a judge; secondary gates ran for the route type. Anything short of this ships as "in progress" with the gaps named.
+
 ## Ship Report
 
-End every workflow with: files written or changed, screenshots captured, defaults applied and the rule that chose each, specialists invoked, placeholder assets awaiting a provider, and the final rubric score.
+End every workflow with: files written or changed, screenshots captured, defaults applied and the rule that chose each, specialists invoked, placeholder assets awaiting a provider, craft checklist items skipped, and the final rubric score with who scored it.
 
 ## Final Principle
 

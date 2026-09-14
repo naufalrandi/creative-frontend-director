@@ -1,6 +1,6 @@
 {
   "name": "creative-frontend-director",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "primary_objective": "Beautiful, creative, project-aware, anti-slop frontend design with a written direction and a scored taste gate",
   "secondary_objectives": [
     "UX",
@@ -47,6 +47,8 @@
     "core/specialist-router.md",
     "evals/baseline.md",
     "evals/scenarios.md",
+    "gates/craft-checklist.md",
+    "gates/judge-prompt.md",
     "gates/quality-gates.md",
     "gates/taste-rubric.md",
     "hooks/README.md",
@@ -56,6 +58,10 @@
     "manifest.json",
     "reference/design-reference.md",
     "reference/harness-adapters.md",
+    "reference/identity-kits.md",
+    "reference/implementation-recipes.md",
+    "reference/motion-recipes.md",
+    "scripts/check-tokens.sh",
     "scripts/install.sh",
     "scripts/update-manifest.sh",
     "setup.sh",

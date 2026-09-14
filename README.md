@@ -6,7 +6,7 @@ A skill that makes your coding agent design the product that exists, not the tem
 
 <p align="center">
 <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-black"></a>
-<img alt="version" src="https://img.shields.io/badge/version-4.1.0-black">
+<img alt="version" src="https://img.shields.io/badge/version-4.2.0-black">
 <img alt="hosts" src="https://img.shields.io/badge/works%20with-Claude%20Code%20%7C%20Codex%20%7C%20OpenCode%20%7C%20Antigravity%20%7C%20Gemini%20%7C%20Cursor%20%7C%20Copilot%20%7C%20Hermes-black">
 </p>
 
@@ -56,8 +56,9 @@ flowchart LR
     D --> E[5 Route<br/>one specialist max]
     E --> F[6 Assets]
     F --> G[7 Implement]
-    G --> H[8 Render<br/>390 / 768 / 1440]
-    H --> I{9 Taste gate<br/>score 1-5 x 5}
+    G --> G2[craft checklist<br/>+ token check]
+    G2 --> H[8 Render<br/>390 / 768 / 1440]
+    H --> I{9 Taste gate<br/>6 dims, independent judge}
     I -- any dim < 3 --> D
     I -- pass --> J[10 Quality gates<br/>a11y, perf, SEO]
     J --> K[11 Ship report]
@@ -70,6 +71,7 @@ Five rules hold the whole thing together:
 3. **One specialist per surface.** Other taste skills execute the direction in `DESIGN.md`. They do not redefine it.
 4. **No render, no done.** Screenshots at three widths are the input to the gate, not a nice-to-have.
 5. **Rethink before polish.** A rubric score under 3 on product fit, hierarchy, typography, rhythm, or identity sends the agent back to structure. Shadows and radii are not allowed to fix a weak concept.
+6. **Commit and finish.** `DESIGN.md` must state six identity commitments (wordmark, type pairing, palette temperature, accent budget, shape, motion), and the sixth rubric dimension, Finish, is capped at 2 while any craft-checklist P0 is open: states, empty and loading, real content, token conformance.
 
 ## What You Get In Your Repo
 
@@ -132,8 +134,8 @@ Stage files name actions, not host tools. [reference/harness-adapters.md](refere
 ```
 SKILL.md          entry point: authority stack, router, eleven stages, hard rules
 core/             stages 1 to 6, the anti-slop recipe, the specialist router, the asset ladder
-reference/        design reference and the harness adapters
-gates/            the taste rubric and the secondary quality gates
+reference/        design reference, identity kits, motion and implementation recipes, harness adapters
+gates/            taste rubric, craft checklist, judge prompt, secondary quality gates
 workflows/        which stages each workflow runs, and how to render
 templates/        DESIGN.md, design read, brand spec, design contract
 hooks/            first-layer routing per host
@@ -144,7 +146,7 @@ docs/evals/       the screenshots and artifacts shown above
 
 ## Honest Limits
 
-- The rubric score is a self-assessment. An independent judge run is on the roadmap.
+- The rubric is scored by an independent judge subagent when the host can dispatch one; otherwise it is a self-score and says so.
 - Eval S1 has been run. S2 to S11 are written and waiting.
 - Antigravity has no verified prompt hook, so routing there is by description or explicit `/creative-frontend-director`.
 - Raster image generation needs a configured provider skill. Without one the agent authors SVG or leaves an honest placeholder.

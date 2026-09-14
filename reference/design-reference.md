@@ -2,6 +2,10 @@
 
 Load for Stage 7. Each topic states the recipe and one concrete example. Values are starting points to adapt to `DESIGN.md`, not defaults to paste.
 
+## Content Before Layout
+
+Write the real copy and seed data first: product name, navigation labels, realistic records, plausible dates and names. Layout decisions made on lorem ipsum are wrong on real content. Details and seed-data rules are in `reference/implementation-recipes.md`.
+
 ## Composition
 
 Build pages from relationships, not component inventories. A strong page has one visual entry point, one scanning path, and one action hierarchy.
