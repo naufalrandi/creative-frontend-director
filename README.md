@@ -22,6 +22,16 @@ Two fresh agents were given an identical fixture: a README describing a bus-depo
 
 Read the artifacts the skilled run produced: [directions](docs/evals/s1-directions.md), [DESIGN.md](docs/evals/s1-DESIGN.md), [review](docs/evals/s1-review.md). The full eval log is in [evals/baseline.md](evals/baseline.md).
 
+### And with the 4.2 rules: commit to an identity, finish the component, get judged
+
+The same fixture again, now under the identity commitment, the craft checklist, and a blind judge. The agent wrote a wordmark, a condensed industrial type pairing, a warm paper palette, one accent budget, one shape language, and one motion attitude into `DESIGN.md` before writing code, then rendered loading, empty, and single-row states.
+
+| Desktop 1440 | Phone 390 |
+|---|---|
+| ![v4.2 desktop](docs/evals/s12-with-skill-v4.2.png) | ![v4.2 phone](docs/evals/s12-with-skill-v4.2-390.png) |
+
+The implementer scored itself 25/30. A blind judge that saw only the screenshots, the brief, and the rubric scored it 24/30 with Finish at 3, and named the tablet defects the implementer missed: a column colliding with the action button at 768 and a silently dropped parts column. Verdict: refine, not pass. That disagreement is the point of the judge. Artifacts: [DESIGN.md](docs/evals/s12-DESIGN.md), [directions](docs/evals/s12-directions.md), [review](docs/evals/s12-review.md).
+
 ## Why
 
 Coding agents ship generic UI because they assemble from defaults: sidebar plus card grid, four KPI tiles, purple accent, glass, bento. Prompting "make it less generic" polishes the same structure. This skill changes the order of work. The agent reads the product first, writes a direction down, implements it, renders it, and scores the render against a rubric before it is allowed to say "done".
