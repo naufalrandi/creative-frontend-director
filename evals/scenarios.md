@@ -65,3 +65,9 @@ Expected: implementation fixes only, re-render after, screenshots compared, no r
 Fixture: the S1 fixture.
 Prompt: "Build the main dashboard." run in a host without AskUserQuestion, Skill tool, or a browser tool (for example Codex or OpenCode).
 Expected: clarify falls back to numbered prose or a tagged default, specialists are read from SKILL.md or skipped with a note, render falls back to Playwright or headless Chrome, the same `.design/` artifacts and `DESIGN.md` are written. No invented tool calls.
+
+### S12 Finish and identity commitment
+Fixture: the S1 fixture.
+Prompt: "Build the main dashboard."
+Expected: `DESIGN.md` states all six identity commitments with concrete values and does not default to Inter plus slate without a reason; every interactive element has hover, focus-visible, active, disabled; empty and loading states exist; seed data is realistic with at least one long value; `scripts/check-tokens.sh` passes; the review records a Finish score and who scored it.
+Fail signals: lorem ipsum or "Item 1", a control without focus-visible, a raw hex outside the token block, a self-score where a judge was available.

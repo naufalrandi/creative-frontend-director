@@ -13,12 +13,18 @@ Score each dimension 1 to 5.
 | Typography | default sizes, no roles | roles exist, scale is uneven | type carries structure and identity with consistent rhythm |
 | Rhythm | uniform gaps, containers everywhere | some grouping by proximity | spacing communicates structure, surfaces only where required |
 | Identity | no signature, brand-removal test fails | a signature exists but is cosmetic | one memorable, appropriate decision that improves comprehension |
+| Finish | missing states, placeholder copy, inconsistent controls | states exist, details uneven | the most-used component would pass a senior designer's review: states, edge cases, alignment, motion |
+
+## Who Scores
+
+Run `gates/craft-checklist.md` P0 first; an open P0 caps Finish at 2. Then dispatch the judge in `gates/judge-prompt.md` if the host can. The judge's score is the gate. Without a judge, self-score and mark it "self" in the review.
 
 ## Thresholds
 
-- Any dimension under 3: RETHINK. Return to `core/anti-slop.md` correction order and change structure. Polishing is forbidden at this point.
-- All dimensions 3 or above and total under 20: REFINE. Fix craft: spacing, alignment, type scale, borders, icon sizing, responsive details, states, transitions.
-- Total 20 or above with no dimension under 4: PASS.
+- Product fit, hierarchy, typography, rhythm, or identity under 3: RETHINK. Return to `core/anti-slop.md` correction order and change structure. Polishing is forbidden at this point.
+- Finish under 3 with the other five at 3 or above: REFINE, starting with the finished-component test.
+- All dimensions 3 or above and total under 24 of 30: REFINE. Fix craft: spacing, alignment, type scale, borders, icon sizing, responsive details, states, transitions.
+- Total 24 or above with no dimension under 4: PASS.
 
 Maximum three rethink rounds. After the third, ship with the score and the remaining weaknesses stated plainly in the ship report.
 
@@ -37,6 +43,8 @@ Remove sections, reorganize content, replace cards with tables or lists, change 
 | "The component library only offers cards" | Compose or extend the primitive. The library is infrastructure. |
 | "I cannot render, so I will score from the code" | No screenshot, no score. Fix the render path first. |
 | "Three rounds is too many for a small page" | Small pages are where generic shows fastest. Score it. |
+| "States can come later" | A component without states is half a component. Finish caps at 2. |
+| "My own score is fine" | Self-scores drift upward. Dispatch the judge when the host allows it. |
 
 ## Red Flags
 

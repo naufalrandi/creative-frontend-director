@@ -9,6 +9,16 @@ Apply only after the taste gate passes. These layers improve implementation with
 | public, indexable | accessibility, performance, Lighthouse, SEO, GEO, visual regression check |
 | private, authenticated | accessibility, performance, Lighthouse; add `noindex` |
 
+## Token Conformance
+
+Run before accessibility. Raw colors, off-scale spacing, inline style attributes, and arbitrary utility values outside the token file are defects, because they are what makes generated UI drift on the second and fiftieth instance.
+
+```bash
+./scripts/check-tokens.sh src
+```
+
+Fix by moving the value into the token file or snapping it to the scale. Never suppress.
+
 ## Accessibility
 
 Target WCAG 2.2 Level AA.

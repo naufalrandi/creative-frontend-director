@@ -56,8 +56,8 @@ core/                         Stage files 1-6: discovery → specialist routing
   ├── design-direction.md     (Stage 4)
   ├── specialist-router.md    (Stage 5)
   └── ...
-reference/                    Design implementation reference (no-slop patterns)
-gates/                        Taste rubric (Stage 9) and quality gates (Stage 10)
+reference/                    Design reference, identity kits, motion and implementation recipes, harness adapters
+gates/                        Taste rubric, craft checklist, judge prompt (Stage 9), quality gates (Stage 10)
 workflows/                    Router logic and render procedure
 templates/                    Output templates (DESIGN.md, brand-spec, etc.)
 hooks/                        UserPromptSubmit hook for first-layer routing
