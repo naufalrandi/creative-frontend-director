@@ -16,7 +16,7 @@ Every workflow runs a subset of the eleven stages in `SKILL.md`. Run the marked 
 | 10 Secondary gates | yes | yes | a11y only | yes | yes | a11y, perf | no | no |
 | 11 Ship | yes | yes | yes | yes | yes | yes | findings | yes |
 
-Stage 7 ends with the P0 items of `gates/craft-checklist.md` and `scripts/check-tokens.sh` in every workflow that implements. Stage 9 uses the judge in `gates/judge-prompt.md` whenever the host can dispatch one.
+Stage 7 ends with applicable P0 items of `gates/craft-checklist.md` and `scripts/check-tokens.sh` in implementing workflows. Extraction checks generated token files but does not apply unrelated UI/state P0 items or require new renders. Stage 9 uses `gates/judge-prompt.md` whenever the host can dispatch a judge. Visual-review reports findings only; it does not run implementation correction loops.
 
 "reuse" means read the existing `DESIGN.md` and `.design/` files and do not regenerate them. "partial" means directions are explored for the page structure only, within the existing identity.
 
@@ -34,11 +34,11 @@ Understand every context the component appears in. Define its states: default, h
 
 ## Redesign Page
 
-Inspect before changing. Separate what works from design debt. Diagnose information architecture, hierarchy, density, navigation, interaction, and identity. Explore alternatives to the page structure within the existing identity. Compare old and new screenshots for comprehension, usability, identity, and craft.
+Inspect before changing. Record invariants in the brief: route slugs, anchors, navigation labels, form names/order and submission contracts, analytics events, permissions, destructive-action safeguards, legal/consent copy, and approved content. Change these only with approval. Separate what works from design debt. Diagnose information architecture, hierarchy, density, navigation, interaction, and identity. Explore page structures within the existing identity. Compare old/new screenshots and verify invariants after changes; include contract checks, not only appearance.
 
 ## Redesign Project
 
-Never redesign page by page. Inventory routes, modules, layouts, components, and assets. Audit current identity and preserve product equity worth keeping. Explore global directions. Redesign the shell and navigation first, then one dense screen, taste gate, then one simple screen, then lock `DESIGN.md`, extract shared primitives, and propagate by workflow rather than mechanically. Finish with a cross-page consistency and responsive review.
+Apply the Redesign Page invariant contract across every affected route. Never redesign page by page. Inventory routes, modules, layouts, components, and assets. Audit current identity and preserve product equity worth keeping. Explore global directions. Redesign the shell and navigation first, then one dense screen, taste gate, then one simple screen, then lock `DESIGN.md`, extract shared primitives, and propagate by workflow rather than mechanically. Finish with a cross-page consistency and responsive review.
 
 ## Improve Existing
 

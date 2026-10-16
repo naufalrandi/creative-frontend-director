@@ -19,7 +19,7 @@ AI slop is not a visual style. It is evidence that structure was assembled from 
 | three-column feature grid | Tell the workflow in order. Each section frames one real product moment with real product UI or a real outcome. |
 | floating device mockups | Show the actual interface at a legible scale, cropped with intent. |
 | mechanically identical spacing | Small gaps within a group, larger gaps between concepts, largest gaps between sections. Rhythm communicates structure. |
-| motion to feel premium | Motion only for state, continuity, spatial relationship, or feedback. |
+| motion to feel premium | Choreograph state, continuity, feedback, or a product-specific story. Expressive briefs can use GSAP/Motion/Three.js with an experience contract, not unrelated effects. |
 | Inter or Roboto as the display face by default | Choose faces from product character and read `reference/design-reference.md` typography before deciding. Same family for display and body only when the direction is deliberately utilitarian. |
 
 None of the reflexes are forbidden. Each needs a written product-specific reason in `DESIGN.md`.

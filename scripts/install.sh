@@ -74,20 +74,84 @@ list_presets() {
 }
 
 install_to() {
-  local root="$1" target="$root/$SKILL"
-  mkdir -p "$root"
-  rm -rf "$target"
-  if [ "$LINK" -eq 1 ]; then
-    ln -s "$SOURCE_DIR" "$target"
-    echo "Linked   $target -> $SOURCE_DIR"
-    return
-  fi
-  mkdir -p "$target"
-  (cd "$SOURCE_DIR" && LC_ALL=C tar --exclude='./.git' --exclude='./.claude' --exclude='./.design' \
-      --exclude='./.github' --exclude='./docs' --exclude='./CLAUDE.md' --exclude='./CONTRIBUTING.md' --exclude='./setup.sh' \
-      -cf - .) | (cd "$target" && LC_ALL=C tar -xf -)
-  chmod +x "$target/hooks/frontend-intent-hook.sh" "$target/scripts/"*.sh
-  echo "Installed $target"
+  python3 - "$SOURCE_DIR" "$1" "$SKILL" "$LINK" <<'PY'
+import os
+from pathlib import Path
+import shutil
+import sys
+import tempfile
+
+source = Path(sys.argv[1]).resolve()
+root = Path(sys.argv[2]).absolute()
+name, link = sys.argv[3], sys.argv[4] == "1"
+
+
+def overlaps(a, b):
+    return a == b or a in b.parents or b in a.parents
+
+
+def validate_target():
+    target = root / name
+    # Resolve parent aliases, not final symlink: replacement renames that entry only.
+    entry = root.resolve() / name
+    if overlaps(source, target) or overlaps(source, entry):
+        raise ValueError(f"unsafe overlapping source/destination: {source} / {target}")
+    return target
+
+
+stage = None
+published = False
+try:
+    validate_target()  # Before mkdir: even a missing nested root must not touch source.
+    root.mkdir(parents=True, exist_ok=True)
+    root = root.resolve()
+    target = validate_target()
+    stage = Path(tempfile.mkdtemp(prefix=f".{name}-stage-", dir=root)).resolve()
+    payload, backup = stage / "new", stage / "old"
+
+    def validate_stage_path(path):
+        # Only this invocation's private staging children may move or be removed.
+        if stage.parent != root or stage.is_symlink() or path.parent != stage:
+            raise ValueError(f"unsafe staging path: {path}")
+
+    if link:
+        payload.symlink_to(source, target_is_directory=True)
+    else:
+        excluded = {".git", ".claude", ".design", ".github", "docs", "CLAUDE.md", "CONTRIBUTING.md", "setup.sh"}
+        shutil.copytree(source, payload,
+                        ignore=lambda directory, names: excluded if Path(directory) == source else ())
+        for path in [payload / "hooks/frontend-intent-hook.sh", *payload.glob("scripts/*.sh")]:
+            path.chmod(path.stat().st_mode | 0o111)
+
+    validate_stage_path(backup)
+    validate_stage_path(payload)
+    validate_target()
+    had_old = os.path.lexists(target)
+    if had_old:
+        target.rename(backup)
+    try:
+        validate_target()
+        validate_stage_path(payload)
+        payload.rename(target)
+        published = True
+    except BaseException:
+        if had_old:
+            validate_target()
+            validate_stage_path(backup)
+            backup.rename(target)
+        raise
+    print(f"{'Linked' if link else 'Installed'} {target}")
+except (OSError, ValueError, shutil.Error) as error:
+    print(f"install: {error}", file=sys.stderr)
+    sys.exit(1)
+finally:
+    if stage is not None:
+        # Never discard rollback data if restoration failed.
+        if os.path.lexists(stage / "old") and not published:
+            print(f"install: rollback retained at {stage / 'old'}", file=sys.stderr)
+        elif stage.parent == root and not stage.is_symlink() and stage.name.startswith(f".{name}-stage-"):
+            shutil.rmtree(stage)
+PY
 }
 
 install_agent_for() {

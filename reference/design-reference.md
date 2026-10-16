@@ -110,7 +110,7 @@ Example: a user edit form groups identity, access, and danger zone as three sect
 
 Start from product truth: audience, pain, promise, differentiation, proof, objections, activation path. Do not use the canonical SaaS sequence by default.
 
-A hero clarifies what the product is, who it is for, and why it matters, in the brand voice. Prefer workflow-driven storytelling and real product UI over decorative mockups. One decisive flourish per page.
+A hero clarifies what the product is, who it is for, and why it matters, in the brand voice. Prefer workflow-driven storytelling and real product UI over decorative mockups. One coherent focal idea carries the page; expressive briefs may develop it through multiple purposeful beats, not unrelated flourishes. For cinematic composition and interactive product stages read `reference/expressive-experiences.md`.
 
 ## Application UI
 
@@ -122,4 +122,4 @@ Responsive design is recomposition, not shrinking. At each breakpoint reconsider
 
 ## Motion
 
-Motion communicates state, continuity, hierarchy, spatial relationship, and feedback. Restrained by default, expressive only when `DESIGN.md` allows it. Always respect `prefers-reduced-motion`. Animate transform and opacity, never layout properties.
+Motion communicates state, continuity, hierarchy, spatial relationship, feedback, and product storytelling. Quiet for expert tasks; expressive/immersive when the brief and `DESIGN.md` call for it. Respect reduced motion, prefer transform/opacity, and measure exceptional layout/paint costs. GSAP, Motion, and Three.js can cooperate with separate property ownership; see `reference/expressive-experiences.md`.

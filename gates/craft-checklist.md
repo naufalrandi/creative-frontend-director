@@ -14,8 +14,12 @@ Run after implementation and before the taste gate. P0 items block. P1 items are
 - [ ] No horizontal scroll at 390, 768, 1440. Tables and code blocks scroll inside their own container.
 - [ ] Long text does not break the layout: test one 60-character title and one 200-character description.
 - [ ] Zero, one, and many are all handled: an empty list, a single row, forty rows.
-- [ ] `prefers-reduced-motion` respected; no infinite animation outside loading.
-- [ ] Token conformance: `scripts/check-tokens.sh` passes.
+- [ ] Reduced motion preserves visible content and primary tasks without parallax, scrubbed camera travel, or auto-rotation; loading shimmer becomes a stable state too. Auto-moving content has pause/stop/hide when required and pauses offscreen/hidden; no flashing effects.
+- [ ] Expressive surfaces follow section 7's engine/property ownership. Timelines, render loops, observers/listeners, and owned GPU resources clean up; unavailable WebGL/assets yield usable static fallback. Keyboard/touch equivalents work; no scroll trap.
+- [ ] Token conformance: `scripts/check-tokens.sh` passes with any justified exceptions recorded in the review.
+- [ ] Primary action works with keyboard; focus is visible, overlays restore focus, and no keyboard trap exists.
+- [ ] Text contrast is at least 4.5:1 (3:1 for large text); required UI boundaries and state indicators reach 3:1.
+- [ ] Applicable error states preserve user input and offer recovery; state fixtures and primary-action outcome have reproduction evidence in the review.
 
 ## P1: Refine Round
 
@@ -23,10 +27,10 @@ Run after implementation and before the taste gate. P0 items block. P1 items are
 - [ ] Dates and times use one format and one timezone convention.
 - [ ] Icons share one set, one stroke weight, one size per context.
 - [ ] Focus order follows reading order; Escape closes overlays; Enter submits.
-- [ ] Text contrast at or above 4.5:1; UI element contrast at or above 3:1.
+- [ ] Recheck P0 contrast after refinements: 4.5:1 text, 3:1 large text and required UI indicators.
 - [ ] Truncation shows a title or tooltip with the full value.
 - [ ] Selected, current, and active states are distinguishable from hover.
-- [ ] Transitions use the duration scale; nothing animates layout.
+- [ ] Transitions use shared timing/springs; layout continuity is transform-based where possible and exceptional reflow/paint costs are measured.
 - [ ] The wordmark, browser title, and page h1 agree.
 
 ## P2: Note If Skipped
@@ -35,7 +39,6 @@ Run after implementation and before the taste gate. P0 items block. P1 items are
 - [ ] Print stylesheet for reports and handovers.
 - [ ] Dark mode, only if `DESIGN.md` declares it.
 - [ ] Optimistic updates with rollback on the primary action.
-- [ ] Skeleton shimmer respects reduced motion.
 
 ## The Finished-Component Test
 

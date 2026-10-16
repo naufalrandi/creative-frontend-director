@@ -1,10 +1,10 @@
 # Creative Frontend Director
 
-**Version:** 4.0.0 | **Stack:** Agent Skill (Markdown + Bash) | **License:** MIT
+**Version:** 4.2.0 | **Stack:** Agent Skill (Markdown + Bash) | **License:** MIT
 
 ## What
 
-An agent skill package for Claude Code and compatible harnesses that makes coding agents behave like principal product designers. It discovers the product context, locks a written design direction in `DESIGN.md`, routes to at most one specialist skill, renders screenshots, and gates completion on a scored taste rubric.
+An agent skill package for Claude Code and compatible harnesses that makes coding agents behave like principal product designers. It discovers the product context, locks a written design direction in `DESIGN.md`, routes to at most one taste specialist with scoped engineering support as needed, renders screenshots, and gates completion on a scored taste rubric.
 
 ## Quick Start
 
@@ -77,7 +77,7 @@ core/project-discovery.md  Analyze README, codebase, existing design for brief
 core/clarify.md           Ask user at most once (≤4 questions) if needed
 core/specialist-router.md  Route to one taste specialist (frontend-patterns, dataviz, etc.)
 core/design-direction.md  Create written direction in DESIGN.md (required artifact)
-gates/taste-rubric.md     Score the final UI on nine dimensions (≥3/5 per dimension)
+gates/taste-rubric.md     Six dimensions; PASS requires ≥4/5 each and no open P0
 workflows/workflows.md     Stage matrix for each workflow type (greenfield, redesign, etc.)
 scripts/install.sh         Bash installer; handles --with-hook to merge settings
 hooks/frontend-intent-hook.sh  Detects frontend intent, injects routing instruction

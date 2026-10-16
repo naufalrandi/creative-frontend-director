@@ -28,3 +28,5 @@ A product signature is one recognizable design behavior grounded in product mean
 ## Test
 
 The signature must improve coherence or comprehension. If removing it makes the product easier to use, it is decoration, not a signature.
+
+Compare with the nearest real competitor supported by the brief or inspected sources. Could that competitor use this surface unchanged except for logo and colors? If so, strengthen the product-specific content, workflow, or behavior—not ornament. Record the competitor and the meaningful difference in `DESIGN.md` section 10. If no competitor is known, mark the comparison unavailable; do not invent one or force novelty over usability.

@@ -1,6 +1,6 @@
 # Stage 10: Secondary Quality Gates
 
-Apply only after the taste gate passes. These layers improve implementation without flattening the direction. After any change here, re-render and confirm the design did not regress.
+Accessibility basics constrain implementation from discovery and block at the craft P0 gate. Run the comprehensive audits below after the taste gate passes; they improve implementation without flattening direction. After changes, re-render and confirm no regression.
 
 ## Route Branching
 
@@ -11,13 +11,13 @@ Apply only after the taste gate passes. These layers improve implementation with
 
 ## Token Conformance
 
-Run before accessibility. Raw colors, off-scale spacing, inline style attributes, and arbitrary utility values outside the token file are defects, because they are what makes generated UI drift on the second and fiftieth instance.
+Run before the comprehensive audits. Unexplained raw colors, off-scale spacing, and literal arbitrary utilities outside declared token sources cause drift. Token-based inline styles are allowed; review dynamic and non-px values separately. Follow the project's tokens and scale rather than imposing this checker's defaults.
 
 ```bash
 ./scripts/check-tokens.sh src
 ```
 
-Fix by moving the value into the token file or snapping it to the scale. Never suppress.
+Prefer existing tokens or the project's declared scale (`--scale`). The checker is a source heuristic, not a CSS parser. A necessary exception must name the check and a specific reason on the preceding standalone comment as documented in `scripts/check-tokens.sh`; record its audit output in the review. Never blanket-hide files or treat exceptions as evidence of correctness.
 
 ## Accessibility
 

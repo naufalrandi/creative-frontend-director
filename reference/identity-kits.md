@@ -13,7 +13,7 @@ Before implementing, `DESIGN.md` must state all six, each with a concrete value:
 3. Palette temperature: warm, cool, or neutral, with the six core tokens.
 4. Accent budget: one accent, where it may appear, maximum times per viewport.
 5. Shape language: one radius, one border weight, one elevation policy.
-6. Motion attitude: functional or expressive, with one duration scale.
+6. Motion attitude: quiet, expressive, or immersive, with shared timing/spring language. Expressive work uses section 7's ownership and fallback contract from `reference/expressive-experiences.md`.
 
 ## Type Pairings By Character
 

@@ -93,7 +93,7 @@ flowchart LR
     A[1 Discover<br/>repo evidence] --> B{2 Clarify<br/>only if material}
     B --> C[3 Resolve brand]
     C --> D[4 Direction<br/>3 options, pick 1<br/>write DESIGN.md]
-    D --> E[5 Route<br/>one specialist max]
+    D --> E[5 Route<br/>one taste specialist<br/>scoped engineering support]
     E --> F[6 Assets]
     F --> G[7 Implement]
     G --> G2[craft checklist<br/>+ token check]
@@ -186,12 +186,30 @@ docs/hero/        composed hero images, regenerated with docs/tools/compose-hero
 docs/evals/       the before/after eval screenshots and artifacts
 ```
 
+## Expressive Layout And Interactive Experiences
+
+Cinematic and interactive briefs use [expressive experience guidance](reference/expressive-experiences.md): content-led composition, responsive section rhythm, purposeful choreography, and optional 3D. Combine **Motion for UI**, **GSAP for narrative timelines**, and **Three.js for spatial scenes** when each has a real job—not as a mandatory dependency bundle. One writer owns each animated property; DOM controls remain usable without canvas. Taste Skill can guide public-page composition within the director's locked identity.
+
+The design contract names engine ownership, timing, mobile/reduced-motion behavior, static/error fallback, and cleanup. Verification includes start/mid/end states, keyboard/touch alternatives, temporal evidence, and measured performance. Existing simple tasks stay fast and restrained.
+
+## Verification
+
+```bash
+python3 scripts/test-tooling.py
+node scripts/test-browser-check.cjs
+bash -n scripts/install.sh scripts/check-tokens.sh
+```
+
+Installation rejects overlapping source/destination paths and stages replacements with rollback on publication failure. Python 3 is required. Token lint accepts repeatable `--tokens` globs and project `--scale`; named, reasoned next-line exceptions are audited. It remains a source heuristic, not computed-style proof.
+
+[Render procedure](workflows/render.md) collects scroll/state/primary-action evidence and uses [browser checks](scripts/browser-check.js) through the host browser. [Controlled evaluation protocol](evals/protocol.md) separates functional/accessibility checks from blind taste judgments and cost. New regression scenarios are specifications, not claims of improved design outcomes.
+
 ## Honest Limits
 
 - The rubric is scored by an independent judge subagent when the host can dispatch one; otherwise it is a self-score and says so.
 - Eval S1 has been run. S2 to S11 are written and waiting.
 - Antigravity has no verified prompt hook, so routing there is by description or explicit `/creative-frontend-director`.
-- Raster image generation needs a configured provider skill. Without one the agent authors SVG or leaves an honest placeholder.
+- Raster generation needs a configured provider skill. Approved assets and permitted factual/open-license downloads do not; unavailable assets or permissions remain explicit gaps.
 
 ## Contributing
 

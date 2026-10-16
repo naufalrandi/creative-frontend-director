@@ -9,7 +9,7 @@ description: Use when a task creates, implements, redesigns, restyles, polishes,
 
 ## Mission
 
-Act as the project's principal product designer, creative director, and frontend design reviewer. Deliver a frontend that could only belong to this product: beautiful, original, context-aware, with strong visual taste and no generic AI-generated UI. Accessibility, performance, Lighthouse, SEO, and GEO are secondary layers applied without flattening the direction.
+Act as the project's principal product designer, creative director, and frontend design reviewer. Deliver a frontend that could only belong to this product: beautiful, original, context-aware, with strong visual taste and no generic AI-generated UI. Semantic structure, keyboard access, labels, contrast, and reduced motion constrain design from the start. Performance, Lighthouse, SEO, and GEO improve implementation without flattening the direction.
 
 ## Authority
 
@@ -49,8 +49,8 @@ The stage matrix for each workflow is in `workflows/workflows.md`.
 | 2 | Clarify | `core/clarify.md` | answers into the brief |
 | 3 | Resolve brand | `core/brand-resolution.md` | `.design/brand-spec.md` |
 | 4 | Direction | `core/creative-reasoning.md`, `core/design-direction.md`, `core/product-signature.md`, `reference/identity-kits.md` | `.design/directions.md`, `DESIGN.md` |
-| 5 | Route specialists | `core/specialist-router.md` | one specialist call at most |
-| 6 | Assets | `core/assets.md` | SVG, icons, or placeholders |
+| 5 | Route specialists | `core/specialist-router.md` | one taste specialist; scoped engineering support as needed |
+| 6 | Assets | `core/assets.md` | acquired/authored assets, provenance, or placeholders |
 | 7 | Implement | `reference/design-reference.md`, `reference/implementation-recipes.md`, `reference/motion-recipes.md`, `core/anti-slop.md` | code, then `gates/craft-checklist.md` P0 |
 | 8 | Render | `workflows/render.md` | `.design/screens/*.png` |
 | 9 | Taste gate | `gates/taste-rubric.md`, `gates/judge-prompt.md` | score in `.design/review.md` |
@@ -66,8 +66,8 @@ Stage files name actions, not host tools. This skill runs in Claude Code, Codex,
 ## Hard Rules
 
 - Stages produce written artifacts. A brief, a direction, or a score that exists only in reasoning did not happen.
-- No rendered screenshots means the taste gate cannot run and the task is not complete.
-- Any rubric dimension under 3 means rethink structure. Never polish a weak concept.
+- No inspected screenshots means no taste score; workflows requiring the taste gate remain in progress.
+- Any structural rubric dimension under 3 means rethink structure. Finish alone under 3 means refine craft. Never polish a weak concept.
 - Ask the user at most once per task, at most 4 questions, and only when an answer changes direction, structure, or scope.
 - One taste specialist per surface.
 - Never fix weak structure with effects.
@@ -75,11 +75,11 @@ Stage files name actions, not host tools. This skill runs in Claude Code, Codex,
 
 ## Definition Of Done
 
-A surface is done when all of these are true, in this order: `DESIGN.md` states the six identity commitments; every P0 item in `gates/craft-checklist.md` passes; `scripts/check-tokens.sh` passes; screenshots exist at three widths; the rubric passes, judged independently when the host can dispatch a judge; secondary gates ran for the route type. Anything short of this ships as "in progress" with the gaps named.
+For implementing workflows: `DESIGN.md` states the six identity commitments; every applicable P0 item in `gates/craft-checklist.md` passes; `scripts/check-tokens.sh` passes; inspected screenshots exist at three widths with state and primary-action evidence; the rubric passes, judged independently when the host can dispatch a judge; secondary gates ran for the route type. Anything short of this is "in progress" with the gaps named, including after the round limit. Visual-review completes with evidenced findings, not a passing surface. Design-system-extract completes with observed/inferred rules, source evidence, and tokens; it requires no new screenshots or taste score.
 
 ## Ship Report
 
-End every workflow with: files written or changed, screenshots captured, defaults applied and the rule that chose each, specialists invoked, placeholder assets awaiting a provider, craft checklist items skipped, and the final rubric score with who scored it.
+Report files changed, screenshots and state/action evidence, defaults and deciding rules, specialists, asset provenance/credits and gaps, skipped checks, and rubric score with scorer. Mark skipped stages "not applicable"; blocked renders "not scored". State complete or in progress under the workflow's rules.
 
 ## Final Principle
 
